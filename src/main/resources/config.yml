@@ -1,0 +1,12 @@
+parameters:
+
+  # NO NEED TO MODIFY ANYTHING BELOW THIS LINE
+  # Configure settings ina client_config.yml
+
+
+  auth.cd.auth_url: https://oidc.imeetcentral.com/oauth2/token
+  auth.cd.issuer: oidc.imeetcentral.com
+  auth.cd.scp: cd.user
+  auth.cd.grant_type: urn:ietf:params:oauth:grant-type:jwt-bearer
+
+  edge.base_url: https://edge.imeetcentral.com/
