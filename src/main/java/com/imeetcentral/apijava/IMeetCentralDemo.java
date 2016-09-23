@@ -13,6 +13,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.joda.time.DateTime;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
@@ -60,17 +61,14 @@ public class IMeetCentralDemo {
             PrivateKey serviceRsaPrivateKey = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(servicePrivateKeyBytes));
             RSASSASigner serviceSigner = new RSASSASigner((RSAPrivateKey) serviceRsaPrivateKey);
 
-            long mills = System.currentTimeMillis() - 10000;
-            Date now = new Date(mills);
-
-            mills = System.currentTimeMillis() + 60000;
-            Date expiresIn = new Date(mills);
+            DateTime now = new DateTime().minusSeconds(10);
+            DateTime expiresIn = new DateTime().plusSeconds(60);
 
             JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                     .issuer(clientId)
                     .audience(audience)
-                    .issueTime(now)
-                    .expirationTime(expiresIn)
+                    .issueTime(now.toDate())
+                    .expirationTime(expiresIn.toDate())
                     .claim("scp", (String)config.get("auth.cd.scp"))
                     .build();
 
