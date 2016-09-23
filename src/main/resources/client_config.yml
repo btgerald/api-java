@@ -1,0 +1,3 @@
+parameters:
+  client.id: ""
+  client.key: ""
